@@ -117,8 +117,8 @@ quaternion quaternion::slerp(const quaternion& q0, const quaternion& q1, float t
 {
 	// todo: 実装して下さい
 	float co = q0.w_ * q1.w_ + q0.x_ * q1.x_ + q0.y_ * q1.y_ + q0.z_ * q1.z_;
+	if (abs(1.0f - co) < 0.00000001f) return q0; //なす角のcosが1なら、q0(=q1)を返す
 	float theta = acos(co);
-	if (theta < 0.0000001f) return q0;	//なす角が0なら、q0(=q1)を返す
 	float si = sin(theta);
 	return q0 * (sin((1 - t) * theta) / si) + q1 * (sin(t * theta) / si);
 }
