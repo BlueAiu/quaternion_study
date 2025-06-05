@@ -112,6 +112,9 @@ quaternion quaternion::inverse() const
 quaternion quaternion::slerp(const quaternion& q0, const quaternion& q1, float t)
 {
 	// todo: 実装して下さい
-	return quaternion();
+	float co = q0.w_ * q1.w_ + q0.x_ * q1.x_ + q0.y_ * q1.y_ + q0.z_ * q1.z_;
+	float theta = acos(co);
+	float si = sin(theta);
+	return q0 * (sin((1 - t) * theta) / si) + q1 * (sin(t * theta) / si);
 }
 
